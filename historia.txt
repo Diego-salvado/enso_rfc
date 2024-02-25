@@ -1,0 +1,91 @@
+#Creamos el repositorio y los archivos y directorios iniciales
+
+git init
+touch historia.txt
+mkdir proyectos
+mkdir procesos
+cd procesos
+mkdir ControlDeCambios
+cd ..
+cd proyectos
+mkdir Prj1
+cd ..
+
+
+#Ahora copiaremos nuestro documento de control de cambios original,
+#junto con las plantillas en blanco al directorio ControlDeCambios
+#(esto lo haré directamente a mano sin comandos), y creare un ese
+#mismo directorio una carpeta para cada tipo de plantilla (en nuesto
+#caso 4 por el momento)
+
+cd procesos
+mkdir rfc
+mkdir procesado
+mkdir planificacion
+mkdir verificacion_validacion
+
+
+#A continuación añadiremos todos los cambios realizados al espacio para
+#hacer commits, y haremos el commit para actualizar el repositorio local
+
+git add *
+git commit -m "Primera versión del control de cambios, y almacenado de las plantillas necesarias para este"
+
+
+#Ahora crearemos otra rama para guardar la segunda version del proyecto,
+#y nos moveremos a ella
+
+git branch "Mejoras"
+git switch Mejoras
+
+
+#A continuación hacemos los cambios en el archivo de control de cambio
+#correspondiente a la segunda versión, substituyendo a su vez los modelos
+#creados para las plantillas, e incluyendo uno nuevo (en la v2 dividimos
+#verificación_validación en 2 plantillas), creando la carpeta correspondiente.
+#Por ultimo añadiremos todo con un commit al repositorio local
+
+git add *
+git commit -m "mejoras implementadas"
+
+
+#Hechas las modificaciones anteriores, uniremos la rama de mejoras con la master
+#(Esto no causa conflictos porque no emos tocado el main, y git lo interpretará
+#como una continuación)
+
+git checkout master
+git merge Mejoras
+
+#Y hecho esto borramos la rama Mejoras
+
+git branch -d Mejoras
+
+
+#Con esto en la rama de master crearemos una nueva tag para marcar la segunda versión, y
+#realizaremos un commit al repositorio local.
+
+git tag -a R2 -m "Segunda version con cambios aceptados" 
+git add *
+git commit -m "Segunda version del control de cambios, con mejoras del modelo y arreglo de errores"
+
+
+#Ahora tocaria hacer la modificación mala para el rollback, y luego subir 
+#la R3 al git hub, pero como aun no tenemos terminada la R3 haré un primer
+#push a repositorio remoto ahora, incluyendo todos los tags por supuesto.
+
+git add *
+git commit -m "Primer push a repositorio remoto"
+git remote add origin https://github.com/Diego-salvado/enso_rfc.git
+git branch -M main
+git push -u origni main
+git push https://{aqui va mi token de acceso a githug}/Diego-salvado/enso_rfc.git
+git push https://{aqui va mi token de acceso a githug}/Diego-salvado/enso_rfc.git --tags
+
+
+#En este punto me di cuenta que había subido el archivo que no era
+#como modelo_validación, así que tuve que borrar el repositorio
+#remoto en github, y hacer un hard reset a R1
+
+git reset --hard R1
+
+#Y luego añadir todo tal y como lo hicimos antes
