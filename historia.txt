@@ -77,7 +77,7 @@ git add *
 git commit -m "Primer push a repositorio remoto"
 git remote add origin https://github.com/Diego-salvado/enso_rfc.git
 git branch -M main
-git push -u origni main
+git push -u origin main
 git push https://{aqui va mi token de acceso a githug}/Diego-salvado/enso_rfc.git
 git push https://{aqui va mi token de acceso a githug}/Diego-salvado/enso_rfc.git --tags
 
@@ -87,5 +87,19 @@ git push https://{aqui va mi token de acceso a githug}/Diego-salvado/enso_rfc.gi
 #remoto en github, y hacer un hard reset a R1
 
 git reset --hard R1
+git tag --delete R2
 
 #Y luego añadir todo tal y como lo hicimos antes
+
+#Despues de esto realizamos un commit incompleto asi que volvemos a R2
+git reset --hard R2
+
+#Y despues de añadir todo correctamente realizamos un commit nuevo que llamaremos R3
+
+git add *
+git commit -m "Tercera version del control de cambios, con mejoras del modelo y sistema de control de versiones"
+git tag -a R3 -m "Tercera version con inclusion de git, (sistema de control de versiones)" 
+
+#E incluimos esto en el repositorio remoto
+git push https://{aqui va mi token de acceso a githug}/Diego-salvado/enso_rfc.git
+git push https://{aqui va mi token de acceso a githug}/Diego-salvado/enso_rfc.git --tags
