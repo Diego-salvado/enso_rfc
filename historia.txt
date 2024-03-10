@@ -103,3 +103,15 @@ git tag -a R3 -m "Tercera version con inclusion de git, (sistema de control de v
 #E incluimos esto en el repositorio remoto
 git push https://{aqui va mi token de acceso a githug}/Diego-salvado/enso_rfc.git
 git push https://{aqui va mi token de acceso a githug}/Diego-salvado/enso_rfc.git --tags
+
+#Despues de un tiempo decidimos volver a modificarlo, pero primero hacemos un pull por cualquier
+#cambio que pueda tener
+git pull https://{aqui va mi token de acceso a githug}/Diego-salvado/enso_rfc.git
+
+#aqui podemos mirar la diferencia entre el commit actual y el remoto con git diff
+
+git fetch origin master
+git diff --stat FETCH_HEAD
+
+#El cual no dice que se realizaron cambios en historia.txt
+#Y hecho esto guardamos todo en el repositorio remoto otra vez
